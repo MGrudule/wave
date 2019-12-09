@@ -1,0 +1,25 @@
+{
+  "name": "wave",
+  "version": "1.0.0",
+  "description": "Fractal sync game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGrudule/wave.git"
+  },
+  "keywords": [
+    "fractals",
+    "node.js",
+    "game",
+    "socket.io"
+  ],
+  "author": "MGrudule",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MGrudule/wave/issues"
+  },
+  "homepage": "https://github.com/MGrudule/wave#readme"
+}

@@ -9,7 +9,9 @@ let data = {
 function setup() {
   let h = 600;
   let w = 600;
-  socket = io.connect("https://maija.uber.space/wave/");
+  socket = io.connect('https://maija.uber.space', {
+    path: "/wave/socket.io"
+  });
   socket.on("mouse", newDrawing);
   createCanvas(h, w);
   background(0);

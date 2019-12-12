@@ -7,25 +7,47 @@ let data = {
 };
 
 function setup() {
-  let h = 600;
-  let w = 600;
-  socket = io.connect('https://maija.uber.space', {
-    path: "/wave/socket.io"
-  });
+  if (windowWidth / windowHeight > 1) {
+    w = windowHeight;
+    h = w * 0.7;
+  } else {
+    w = windowWidth;
+    h = windowWidth;
+  }
+
+
+  socket = io.connect(
+    "https://maija.uber.space", {
+      path: "/wave/socket.io"
+    }
+  );
   socket.on("mouse", newDrawing);
-  createCanvas(h, w);
+  createCanvas(w, h);
+
   background(0);
 }
 
 function draw() {
   background(0);
-  translate(width / 2, height);
+  translate(width / 2, height - 40);
   branch(100, [120, 120, 120, 150]);
   branch2(100, [120, 120, 120, 50]);
 }
 
 function mousePressed() {
   mouseDragged();
+}
+
+function windowResized() {
+  if (windowWidth / windowHeight > 1) {
+    w = windowHeight;
+    h = w * 0.7;
+  } else {
+    w = windowWidth;
+    h = windowWidth;
+  }
+
+  resizeCanvas(w, h);
 }
 
 function mouseDragged() {

@@ -5,16 +5,10 @@ let data = {
   x: 0,
   y: 0
 };
+let bLen = 100;
 
 function setup() {
-  if (windowWidth / windowHeight > 1) {
-    w = windowHeight;
-    h = w * 0.7;
-  } else {
-    w = windowWidth;
-    h = windowWidth;
-  }
-
+  setCanvasSize(windowWidth, windowHeight)
 
   socket = io.connect(
     "https://maija.uber.space", {
@@ -22,32 +16,20 @@ function setup() {
     }
   );
   socket.on("mouse", newDrawing);
-  createCanvas(w, h);
 
+  createCanvas(w, h);
   background(0);
 }
 
 function draw() {
   background(0);
-  translate(width / 2, height - 40);
-  branch(100, [120, 120, 120, 150]);
-  branch2(100, [120, 120, 120, 50]);
+  translate(width / 2, height - bLen * 0.4);
+  branch(bLen, [120, 120, 120, 150]);
+  branch2(bLen, [120, 120, 120, 50]);
 }
 
 function mousePressed() {
   mouseDragged();
-}
-
-function windowResized() {
-  if (windowWidth / windowHeight > 1) {
-    w = windowHeight;
-    h = w * 0.7;
-  } else {
-    w = windowWidth;
-    h = windowWidth;
-  }
-
-  resizeCanvas(w, h);
 }
 
 function mouseDragged() {
@@ -98,5 +80,22 @@ function branch2(len, color) {
     rotate(-angle2);
     branch2(len * 0.75, [200, 200, 200, 200]);
     pop();
+  }
+}
+
+function windowResized() {
+  setCanvasSize(windowWidth, windowHeight)
+  resizeCanvas(w, h);
+}
+
+function setCanvasSize(windowWidth, windowHeight) {
+  if (windowWidth / windowHeight > 1) {
+    w = windowHeight;
+    h = w * 0.7;
+    bLen = 100;
+  } else {
+    w = windowWidth;
+    h = w;
+    bLen = 70;
   }
 }
